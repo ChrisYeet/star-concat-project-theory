@@ -1,8 +1,8 @@
 {
   "variables": ["S", "A"],
-  "alphabet": ["a", "b"],
-  "start_symbol": "S",
   "grammar": {
     "S": ["aS", "bS", "ε"]
-  }
+  },
+  "start_symbol": "S",
+  "alphabet": ["a", "b"]
 }
