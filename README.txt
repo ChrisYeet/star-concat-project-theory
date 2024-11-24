@@ -1,3 +1,5 @@
+Made by Christopher Yee for Theory of Computation Final Project
+
 To run this project, take your handy javac or Java Compiler.
 This project is being tested and ran on Java 17.
 

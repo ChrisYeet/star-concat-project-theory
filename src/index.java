@@ -34,10 +34,8 @@ public class index {
         System.exit(1);
       }
       
-      // error checking to see if the variable has a grammar - DON'T NEED
-//      for (Object variable : var){
-//        if(!grammar.containsKey(variable.toString())) { throw new Exception(); }
-//      }
+      // Validate grammar rules
+      validateGrammar(grammar, var, alph);
       
       // check if start_symbol + ' exists, if it does do some other start_symbol
       start = check(var, start);
@@ -72,12 +70,40 @@ public class index {
     if(variable.contains(start + "'")) {
       start = start + "'";
       check(variable, start);
-    }else {
+    } else {
       start = start + "'";
     }
     
     return start;
   }
+  
+  // Validates that each rule only contains variables and alphabet symbols
+  public static void validateGrammar(JSONObject grammar, JSONArray variables, JSONArray alphabet) throws Exception {
+    // Combine variables and alphabet into a set for quick lookup
+    Set<String> vSymbols = new HashSet<>();
+    vSymbols.addAll(variables);
+    vSymbols.addAll(alphabet);
+    vSymbols.add("ε");
+    
+    // Iterate over each variable's grammar rules
+    for (Object key : grammar.keySet()) {
+      String variable = (String) key;
+      JSONArray grammars = (JSONArray) grammar.get(variable);
+      
+      // Check each grammar rule
+      for (Object g : grammars) {
+        String rule = (String) g;
+        for (int i = 0; i < rule.length(); i++) {
+          String symbol = String.valueOf(rule.charAt(i));
+          if (!vSymbols.contains(symbol)) {
+            System.out.println("Invalid grammar rule detected: " + rule);
+            System.exit(1);
+          }
+        }
+      }
+    }
+  }
+  
   
   // A helper method to print JSON not on one line - formatting
   public static String printHashMap(String jsonString) {
