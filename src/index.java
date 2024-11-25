@@ -30,14 +30,14 @@ public class index {
     
     // testing to see if I have everything aka nothing is null / empty
       if (var == null || alph == null || (start == null || start.isEmpty()) || grammar == null) {
-        System.out.println("You did something wrong");
+        System.out.println("Something is empty in the state of your tuple");
         System.exit(1);
       }
       
-      // Validate grammar rules
+      // validates grammar rules
       validateGrammar(grammar, var, alph);
       
-      // check if start_symbol + ' exists, if it does do some other start_symbol
+      // checks if start_symbol + ' exists, if it does do some other start_symbol
       start = check(var, start);
       
       var.add(start);
@@ -50,7 +50,7 @@ public class index {
       /*System.out.println(jo.toJSONString());*/
     
     } catch (Exception e) {
-      System.out.println("You did something wrong");
+      System.out.println("You did something wrong with the setup of your tuple");
       System.exit(1);
     }
     
@@ -66,7 +66,7 @@ public class index {
   }
   
   // Checks to see if new start variable will work ('), if not keep adding "'" to the end
-  public static String check(JSONArray variable, String start) throws Exception {
+  public static String check(JSONArray variable, String start) {
     if(variable.contains(start + "'")) {
       start = start + "'";
       check(variable, start);
@@ -97,7 +97,7 @@ public class index {
           String symbol = String.valueOf(rule.charAt(i));
           if (!vSymbols.contains(symbol)) {
             System.out.println("Invalid grammar rule detected: " + rule);
-            System.exit(1);
+            throw new Exception();
           }
         }
       }
