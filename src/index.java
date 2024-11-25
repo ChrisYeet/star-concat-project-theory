@@ -44,8 +44,6 @@ public class index {
       jo.put("start_symbol", start);
       grammar.put(start, Arrays.asList(old_start + start, "ε"));
       
-      
-      
       // testing (won't work for the array as it prints the array's memory reference)
       /*System.out.println(jo.toJSONString());*/
     
